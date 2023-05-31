@@ -1,0 +1,493 @@
+<html>
+<head>
+<title> Custom Game </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+<script>
+	function start(){
+		sjs.open("target",500,400);
+		var background = new sjs.Image("Images/First boss background.png");
+		background.setSize(sjs.getWidth(),sjs.getHeight());
+
+		var playM = new Audio('Music/mad_robots.mp3');
+			var toggle = true;
+			var musicOn = false;
+			sjs.keyDown(M_KEY, function(){
+				if(toggle == true){
+					if(musicOn == false){
+						playM.play();
+						musicOn = true;
+					} else {
+						playM.pause();
+						musicOn = false;
+					}
+					toggle = false;
+					setTimeout(function(){
+						toggle = true;
+					},1000);
+				} //end if toggle statement
+			}); //end keydown function
+	
+//Player code
+		var player = new sjs.Image("Images/Player up.png");
+		player.type = "player";
+		player.setSize(25,25);
+		player.friction = .5;
+		player.accel = .3;
+		player.center();
+
+		var Canattack = true;
+		var Canthrow = true;
+		r_facing = false;
+		l_facing = false;
+		u_facing = false;
+		d_facing = false;
+
+
+		sjs.keyDown(A_KEY, function(){
+			player.setImage("Images/Player left.png");
+			player.pushLeft();
+			l_facing = true;
+			r_facing = false;
+			u_facing = false;
+			d_facing = false;
+		});
+
+		sjs.keyDown(W_KEY, function(){
+			player.setImage("Images/Player up.png");
+			player.pushUp();
+			u_facing = true;
+			l_facing = false;
+			r_facing = false;
+			d_facing = false;
+		});
+
+		sjs.keyDown(S_KEY, function(){
+			player.setImage("Images/Player down.png");
+			player.pushDown();
+			d_facing = true;
+			l_facing = false;
+			r_facing = false;
+			u_facing = false;
+		});
+
+		sjs.keyDown(D_KEY, function(){
+			player.setImage("Images/Player right.png");
+			player.pushRight();
+			r_facing = true;
+			l_facing = false;
+			u_facing = false;
+			d_facing = false;
+		});
+//end player movement code
+		var Playerattackicon = new sjs.Image("Images/Player attack icon unused.png");
+		Playerattackicon.setSize(40,40);
+		Playerattackicon.bottom().offset(110,-7);
+
+		sjs.keyDown(Q_KEY, function(){
+			if(Canattack == true){
+				Playerattackicon.setImage("Images/Player attack icon used full.png");
+			setTimeout(function(){
+				Playerattackicon.setImage("Images/Player attack icon used half.png");
+			},500);
+			setTimeout(function(){
+				Playerattackicon.setImage("Images/Player attack icon unused.png");
+			},900)
+				if(l_facing == true && Canattack == true){
+					Canattack = false;
+					var Playerattack = new sjs.Image("Images/Player attack left.png");
+					Playerattack.type = "Playerattack";
+				  Playerattack.setSize(45,55);
+				  Playerattack.noBounds = true;
+					Playerattack.moveTo(player.getX()-30,player.getY()-20);
+					
+				}
+				if(u_facing == true && Canattack == true){
+					Canattack = false;
+					var Playerattack = new sjs.Image("Images/Player attack up.png");
+					Playerattack.type = "Playerattack";
+				  Playerattack.setSize(65,55);
+				  Playerattack.noBounds = true;
+					Playerattack.moveTo(player.getX()-17,player.getY()-30);
+					
+				}
+				if(r_facing == true && Canattack == true){
+					Canattack = false;
+					var Playerattack = new sjs.Image("Images/Player attack right.png");
+					Playerattack.type = "Playerattack";
+				  Playerattack.setSize(65,55);
+				  Playerattack.noBounds = true;
+					Playerattack.moveTo(player.getX(),player.getY()-12);
+				}
+				if(d_facing == true && Canattack == true){
+					Canattack = false;
+					var Playerattack = new sjs.Image("Images/Player attack down.png");
+					Playerattack.type = "Playerattack";
+				  Playerattack.setSize(65,55);
+				  Playerattack.noBounds = true;
+					Playerattack.moveTo(player.getX()-22,player.getY()+5);
+				}
+			setTimeout(function(){
+				 Playerattack.destroy();
+			},200);
+			setTimeout(function(){
+				Canattack = true;
+		  },1000);//end timeout
+			}// end if Canattack
+			
+		}); // end player attack function 
+		var playerdaggericon = new sjs.Image("Images/Player dagger icon unused.png");
+		playerdaggericon.setSize(35,35);
+		playerdaggericon.bottom().offset(+150,-10);
+		canthrowvalue = 1;
+		sjs.keyDown(E_KEY, function(){
+
+				if(l_facing == true && Canthrow == true){
+					Canthrow = false;
+					canthrowvalue = 0;
+					var Dagger = new sjs.Image("Images/Player dagger left.png");
+					Dagger.type = "Dagger";
+					Dagger.setSize(15,15);
+					Dagger.noBounds = true;
+					Dagger.moveTo(player.getX()-10, player.getY()+5);
+					Dagger.friction = 0;
+					Dagger.accel = .5;
+					Dagger.pushLeft();
+				}
+				if(r_facing == true && Canthrow == true){
+					Canthrow = false;
+					canthrowvalue = 0;
+					var Dagger = new sjs.Image("Images/Player dagger right.png");
+					Dagger.type = "Dagger";
+					Dagger.setSize(15,15);
+					Dagger.noBounds = true;
+					Dagger.moveTo(player.getX()+15, player.getY()+5);
+					Dagger.friction = 0;
+					Dagger.accel = .5;
+					Dagger.pushRight();
+				}
+				if(u_facing == true && Canthrow == true){
+					Canthrow = false;
+					canthrowvalue = 0;
+					var Dagger = new sjs.Image("Images/Player dagger up.png");
+					Dagger.type = "Dagger";
+					Dagger.setSize(15,15);
+					Dagger.noBounds = true;
+					Dagger.moveTo(player.getX()+5, player.getY()-5);
+					Dagger.friction = 0;
+					Dagger.accel = .5;
+					Dagger.pushUp();
+				}
+				if(d_facing == true && Canthrow == true){
+					Canthrow = false;
+					canthrowvalue = 0;
+					var Dagger = new sjs.Image("Images/Player dagger down.png");
+					Dagger.type = "Dagger";
+					Dagger.setSize(15,15);
+					Dagger.noBounds = true;
+					Dagger.moveTo(player.getX()+5, player.getY()+15);
+					Dagger.friction = 0;
+					Dagger.accel = .5;
+					Dagger.pushDown();
+				}
+			 if(canthrowvalue == 0){
+				playerdaggericon.setImage("Images/Player dagger icon used 1.png");
+				setTimeout(function(){
+					playerdaggericon.setImage("Images/Player dagger icon used 2.png");
+				},1000); // end Player dagger icon 2
+				setTimeout(function(){
+					playerdaggericon.setImage("Images/Player dagger icon used 3.png");
+				},2000); // end Player dagger icon 3
+				setTimeout(function(){
+					playerdaggericon.setImage("Images/Player dagger icon used 4.png");
+				},3000); // end player dagger icon 4
+				setTimeout(function(){
+					playerdaggericon.setImage("Images/Player dagger icon used 5.png");
+				},4000); // end player dagger icon 5
+				setTimeout(function(){
+					playerdaggericon.setImage("Images/Player dagger icon unused.png");
+				},5000);// end player dagger icon 6
+			}
+				if(Canthrow == false && canthrowvalue == 0){
+					setTimeout(function(){
+						Canthrow = true;
+					},5000);
+					canthrowvalue = 1;
+				}
+		}); // end player dagger function
+
+		sjs.onHit("Dagger", ["right_screen", "left_screen", "bottom_screen", "top_screen"], function(x,y){
+				x.destroy();
+		});
+
+		var Playerhealthimage = new sjs.Image("Images/Player healthbar full.png");
+		Playerhealthimage.setSize(200,200);
+		Playerhealthimage.bottom();
+		
+//end player code
+
+			//Boss code
+
+		var Bosshealthimage = new sjs.Image("Images/Boss healthbar full.png");
+		Bosshealthimage.setSize(200,200);
+
+		var Boss = new sjs.Image("Images/First Boss Right.png");
+		Boss.type = "boss";
+		Boss.setSize(75,75);
+		Boss.friction = 0;
+		Boss.accel = .2;
+		Boss.noBounds = true;
+		setTimeout(function(){
+			Boss.pushRight();
+		},5000);
+		
+		sjs.onHit("boss","right_screen", function(x,y){
+			sjs.stoppedBy(x,y);
+			Boss.setImage("Images/First Boss Left.png");
+			setTimeout(function(){
+					Boss.pushDown();
+			},5000);
+			setTimeout(function(){
+				var Bossbullet = new sjs.Image("Images/First boss shot.png");
+				Bossbullet.type = "Bossbullet";
+				Bossbullet.setSize(25,25);
+				Bossbullet.bounce();
+				Bossbullet.moveTo(Boss.getX()+5, Boss.getY()+10);
+				Bossbullet.friction = 0;
+				Bossbullet.accel = .3;
+				Bossbullet.pushLeft(3);
+				Bossbullet.pushUp(1);
+				setTimeout(function(){
+					Bossbullet.destroy();
+				},30000);
+			},2500);
+		});//end boss-right_screen onhit
+
+		sjs.onHit("boss", "bottom_screen", function(x,y){
+			sjs.stoppedBy(x,y);
+			setTimeout(function(){
+				Boss.pushLeft();
+			},5000);
+			setTimeout(function(){
+				var Bossbullet = new sjs.Image("Images/First boss shot.png");
+				Bossbullet.type = "Bossbullet";
+				Bossbullet.setSize(25,25);
+				Bossbullet.bounce();
+				Bossbullet.moveTo(Boss.getX()+5, Boss.getY()+10);
+				Bossbullet.friction = 0;
+				Bossbullet.accel = .3;
+				Bossbullet.pushUp(3);
+				Bossbullet.pushRight(1);
+				setTimeout(function(){
+					Bossbullet.destroy();
+				},30000);
+			},2500);
+		});//end boss-bottom_screen onhit
+
+		sjs.onHit("boss", "left_screen", function(x,y){
+			sjs.stoppedBy(x,y);
+			Boss.setImage("Images/First Boss Right.png");
+			setTimeout(function(){
+				Boss.pushUp();
+			},5000);
+			setTimeout(function(){
+				var Bossbullet = new sjs.Image("Images/First boss shot.png");
+				Bossbullet.type = "Bossbullet";
+				Bossbullet.setSize(25,25);
+				Bossbullet.bounce(); 
+				Bossbullet.moveTo(Boss.getX()+50, Boss.getY()+10);
+				Bossbullet.friction = 0;
+				Bossbullet.accel = .3;
+				Bossbullet.pushRight(3);
+				Bossbullet.pushDown(1);
+				setTimeout(function(){
+					Bossbullet.destroy();
+				},30000);
+			},2500);
+		});//end boss-left_screen onhit
+
+		sjs.onHit("boss", "top_screen", function(x,y){
+			sjs.stoppedBy(x,y);
+			setTimeout(function(){
+				Boss.pushRight();
+			},5000);
+			setTimeout(function(){
+				var Bossbullet = new sjs.Image("Images/First boss shot.png");
+				Bossbullet.type = "Bossbullet";
+				Bossbullet.setSize(25,25);
+				Bossbullet.bounce();
+				Bossbullet.moveTo(Boss.getX()+50, Boss.getY()-10);
+				Bossbullet.friction = 0;
+				Bossbullet.accel = .3;
+				Bossbullet.pushDown(3);
+				Bossbullet.pushLeft(1);
+				setTimeout(function(){
+					Bossbullet.destroy();
+				},30000);
+			},2500);
+		});// end boss-top_screen onhit
+
+//end boss code
+
+//Boss and player code
+		Canbehit = true;
+		Playerhealth = 3;
+		canbehitvalue = 1;
+		sjs.onHit("player", "boss", function(x,y){
+			sjs.stoppedBy(x,y);
+			if(Canbehit == true){
+				Canbehit = false;
+				Playerhealth = Playerhealth - 1;	
+				canbehitvalue = 0;
+			}
+			if(Playerhealth == 2){
+				Playerhealthimage.setImage("Images/Player healthbar mid.png");
+			}
+			if(Playerhealth == 1){
+				Playerhealthimage.setImage("Images/Player healthbar low.png");
+			}
+			if(Playerhealth == 0){
+				Playerhealthimage.setImage("Images/Player healthbar dead.png");
+				window.location = "gameover.html";
+			}
+			if(Canbehit == false && canbehitvalue == 0){
+				setTimeout(function(){
+					Canbehit = true;
+				},2000);
+				canbehitvalue = 1;
+			}
+		}); // end player-boss onhit
+
+		sjs.onHit("player", "Bossbullet", function(x,y){
+			if(Canbehit == true){
+				Canbehit = false;
+				Playerhealth = Playerhealth - 1;	
+				canbehitvalue = 0;
+			}
+			if(Playerhealth == 2){
+				Playerhealthimage.setImage("Images/Player healthbar mid.png");
+			}
+			if(Playerhealth == 1){
+				Playerhealthimage.setImage("Images/Player healthbar low.png");
+			}
+			if(Playerhealth == 0){
+				Playerhealthimage.setImage("Images/Player healthbar dead.png");
+				window.location = "gameover.html";
+			}
+			if(Canbehit == false && canbehitvalue == 0){
+				setTimeout(function(){
+					Canbehit = true;
+				},2000);
+				canbehitvalue = 1;
+			}
+		}); // end player-bossbullet onhit
+
+		Bosscanbehit = true;
+		Bosshealth = 10;
+		bosscanbehitvalue = 1;
+		sjs.onHit("Playerattack", "boss", function(){
+			if(Bosscanbehit == true){
+				Bosscanbehit = false;
+				Bosshealth = Bosshealth - 1;
+				bosscanbehitvalue = 0;
+			}
+			if(Bosshealth == 9){
+				Bosshealthimage.setImage("Images/Boss healthbar 90%.png");
+			}
+			if(Bosshealth == 8){
+				Bosshealthimage.setImage("Images/Boss healthbar 80%.png")
+			}
+			if(Bosshealth == 7){
+				Bosshealthimage.setImage("Images/Boss healthbar 70%.png");
+			}
+			if(Bosshealth == 6){
+				Bosshealthimage.setImage("Images/Boss healthbar 60%.png");
+			}
+			if(Bosshealth == 5){
+				Bosshealthimage.setImage("Images/Boss healthbar 50%.png");
+			}
+			if(Bosshealth == 4){
+				Bosshealthimage.setImage("Images/Boss healthbar 40%.png");
+			}
+			if(Bosshealth == 3){
+				Bosshealthimage.setImage("Images/Boss healthbar 30%.png");
+			}
+			if(Bosshealth == 2){
+				Bosshealthimage.setImage("Images/Boss healthbar 20%.png");
+			}
+			if(Bosshealth == 1){
+				Bosshealthimage.setImage("Images/Boss healthbar 10%.png");
+			}
+			if(Bosshealth == 0){
+				Bosshealthimage.setImage("Images/Boss healthbar dead.png");
+				window.location = "win.html";
+			}
+			if(Bosscanbehit == false && bosscanbehitvalue == 0){
+				setTimeout(function(){
+					Bosscanbehit = true;
+				},1500);
+				bosscanbehitvalue = 1;
+			}
+		});// end playerattack-boss onhit
+		
+		Bosscanbehit = true;
+		Bosshealth = 10;
+		bosscanbehitvalue = 1;
+		sjs.onHit("Dagger", "boss", function(x,y){
+			if(Bosscanbehit == true){
+				Bosscanbehit = false;
+				Bosshealth = Bosshealth - 1;
+				bosscanbehitvalue = 0;
+			}
+			if(Bosshealth == 9){
+				Bosshealthimage.setImage("Images/Boss healthbar 90%.png");
+			}
+			if(Bosshealth == 8){
+				Bosshealthimage.setImage("Images/Boss healthbar 80%.png")
+			}
+			if(Bosshealth == 7){
+				Bosshealthimage.setImage("Images/Boss healthbar 70%.png");
+			}
+			if(Bosshealth == 6){
+				Bosshealthimage.setImage("Images/Boss healthbar 60%.png");
+			}
+			if(Bosshealth == 5){
+				Bosshealthimage.setImage("Images/Boss healthbar 50%.png");
+			}
+			if(Bosshealth == 4){
+				Bosshealthimage.setImage("Images/Boss healthbar 40%.png");
+			}
+			if(Bosshealth == 3){
+				Bosshealthimage.setImage("Images/Boss healthbar 30%.png");
+			}
+			if(Bosshealth == 2){
+				Bosshealthimage.setImage("Images/Boss healthbar 20%.png");
+			}
+			if(Bosshealth == 1){
+				Bosshealthimage.setImage("Images/Boss healthbar 10%.png");
+			}
+			if(Bosshealth == 0){
+				Bosshealthimage.setImage("Images/Boss healthbar dead.png");
+				window.location = "win.html";
+			}
+			if(Bosscanbehit == false && bosscanbehitvalue == 0){
+				setTimeout(function(){
+					Bosscanbehit = true;
+				},1500);
+				bosscanbehitvalue = 1;
+			}
+			x.destroy();
+		}); // end player dagger-boss onhit
+
+		sjs.onHit("Dagger", "Bossbullet", function(x,y){
+			x.destroy();
+			y.destroy();
+		});
+	} //end start
+</script>
+</head>
+<body onload="start()">
+<h1> Custom Game </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>

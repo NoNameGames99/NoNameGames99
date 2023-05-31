@@ -1,0 +1,25 @@
+<html>
+<head>
+<title> Custom Game </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+<script>
+	function start(){
+		sjs.open("target",500,400);
+
+		var WinText = new sjs.Text("You have deafeated the Moss Mega!", 20, "Green");
+		WinText.center().offset(0,-85);
+
+		var StartBtn = new sjs.Button("Fight Again", function(){
+			window.location = "index.html";
+		});
+		StartBtn.center();
+		
+	} //end start
+</script>
+</head>
+<body onload="start()">
+<h1> Custom Game </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>
