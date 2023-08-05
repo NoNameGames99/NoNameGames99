@@ -37,8 +37,8 @@
 			point.position = new BABYLON.Vector3(x, 0.1, z);
 			point.rotation.y - zrot;
 			point.physicsImposter = new BABYLON.PhysicsImposter(point, BABYLON.PHysicsImposter.BoxImposter, {
-				mass: 0
-				
+				mass: 0,
+				restitution: 0.9
 			}, scene);
 		}
 
