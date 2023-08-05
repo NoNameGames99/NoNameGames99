@@ -33,7 +33,7 @@
 				height: 0.5,
 				depth: 12
 			}, scene);
-			point.material.diffuseColor = new BABYLON.Color3(1, 0, 1);
+			point.material= new BABYLON.Color3(1, 0, 1);
 			point.position = new BABYLON.Vector3(x, 0.1, z);
 			point.rotation.y - zrot;
 			point.physicsImposter = new BABYLON.PhysicsImposter(point, BABYLON.PHysicsImposter.BoxImposter, {
