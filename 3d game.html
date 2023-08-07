@@ -37,7 +37,7 @@
 			point.material.diffuseColor = new BABYLON.Color3(1, 0, 1);
 			point.position = new BABYLON.Vector3(x, 0.1, z);
 			point.rotation.y - zrot;
-			point.physicsImposter = new BABYLON.PhysicsImposter(point, BABYLON.PhysicsImposter.BoxImposter, {
+			point.physicsImposter = new BABYLON.PhysicsImposter(point, BABYLON.PhysicsImposter, {
 				mass: 0,
 				restitution: 0.9
 			}, scene);
