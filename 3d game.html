@@ -10,6 +10,15 @@
 	function start() {
 		var canvas = document.getElementById('renderCanvas');
 		var engine = new BABYLON.Engine(canvas, true);
+
+		var Keys = {};
+		window.addEventListener('keydown', function(e) {
+			keys[e.key] = true;
+		});
+
+		window.addEventListener('keyup', function(e) {
+			keys[e.key] = false;
+		});
 		var scene = new BABYLON.Scene(engine);
 
 		var gravityVector = new BABYLON.Vector3(0, -9.81, 0);
@@ -34,6 +43,33 @@
 
 		var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), scene);
 		
+		scene.registerAfterRender(function() {
+			var vel = playerSphere.physicsImpostor.getLinearVelocity();
+			playerSphere.physicsImposter.setLinearVelocity(vel.scale(.98));
+
+			var forward = camera.getFrontPosition(1).subtract(camera.position);
+			forward.y = 0;
+			forward = forward.normalize().scale(1);
+
+			var backward = BABYLON.Vector3.TransformCoordinates(forward, BABYLON.Matrix.RotationY(Math.PI / 2));
+
+			var left = BABYLON.Vector3.TransformCoordinates(forward, BABYLON.Matrix.RotationY((3 * Math.PI) / 2));
+
+			var right = BABYLON.Vector3.TransformCoordinates(forward, BABYLON.Matrix.RotationY(Math.PI / 2));
+
+			if (keys.w) {
+				playerSphere.applyImpulse(foward, playerSphere.getAbsolutePosition());
+			}
+			if (keys.s) {
+				playerpSphere.applyImpulse(backward, playerSphere.getAbsolutePosition());
+			}
+			if (keys.a) {
+				playerSphere.applyImpuse(left, playerSphere.getAbsolutePosition());
+			}
+			if (keys.d) {
+				playerSphere.applyImpuse(right, playerSphere.getAbsolutePosition());
+			}
+		});
 		function drawPoint(x, z, zrot, scene) {
 		var point = BABYLON.MeshBuilder.CreateBox('point', {
 		width: 10,
