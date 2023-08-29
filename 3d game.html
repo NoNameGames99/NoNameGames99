@@ -11,7 +11,7 @@
 		var canvas = document.getElementById('renderCanvas');
 		var engine = new BABYLON.Engine(canvas, true);
 
-		var Keys = {};
+		var keys = {};
 		window.addEventListener('keydown', function(e) {
 			keys[e.key] = true;
 		});
@@ -46,7 +46,7 @@
 		scene.registerAfterRender(function() {
 			var vel = playerSphere.physicsImpostor.getLinearVelocity();
 			playerSphere.physicsImpostor.setLinearVelocity(vel.scale(.98));
-			
+
 			var forward = camera.getFrontPosition(1).subtract(camera.position);
 			forward.y = 0;
 			forward = forward.normalize().scale(1);
