@@ -45,7 +45,7 @@
 		
 		scene.registerAfterRender(function() {
 			var vel = playerSphere.physicsImpostor.getLinearVelocity();
-			playerSphere.physicsImposter.setLinearVelocity(vel.scale(.98));
+			playerSphere.physicsImpostor.setLinearVelocity(vel.scale(.98));
 
 			var forward = camera.getFrontPosition(1).subtract(camera.position);
 			forward.y = 0;
