@@ -58,7 +58,7 @@
 			var right = BABYLON.Vector3.TransformCoordinates(forward, BABYLON.Matrix.RotationY(Math.PI / 2));
 
 			if (keys.w) {
-				playerSphere.applyImpulse(foward, playerSphere.getAbsolutePosition());
+				playerSphere.applyImpulse(forward, playerSphere.getAbsolutePosition());
 			}
 			if (keys.s) {
 				playerpSphere.applyImpulse(backward, playerSphere.getAbsolutePosition());
