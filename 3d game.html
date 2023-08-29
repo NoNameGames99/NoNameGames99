@@ -69,6 +69,10 @@
 			if (keys.d) {
 				playerSphere.applyImpuse(right, playerSphere.getAbsolutePosition());
 			}
+
+			if (playerSphere.position.y < -10) {
+				lost();
+			}
 		});
 		function drawPoint(x, z, zrot, scene) {
 		var point = BABYLON.MeshBuilder.CreateBox('point', {
@@ -90,6 +94,10 @@
 
 		engine.runRenderLoop(scene.render.bind(scene));
 		window.addEventListener('resize', engine.resize.bind(engine));
+	}
+	function lost(){
+		window.location.reload();
+		alert("you lose!");
 	}
 </script>
 <style>
