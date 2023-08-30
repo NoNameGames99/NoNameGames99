@@ -19,6 +19,7 @@
 		window.addEventListener('keyup', function(e) {
 			keys[e.key] = false;
 		});
+
 		var scene = new BABYLON.Scene(engine);
 
 		var gravityVector = new BABYLON.Vector3(0, -9.81, 0);
@@ -63,6 +64,7 @@
 			if (keys.s) {
 				playerSphere.applyImpulse(backward, playerSphere.getAbsolutePosition());
 			}
+
 			if (keys.a) {
 				playerSphere.applyImpulse(left, playerSphere.getAbsolutePosition());
 			}
