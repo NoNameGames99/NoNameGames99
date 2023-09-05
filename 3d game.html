@@ -27,6 +27,15 @@
 
 		scene.clearColor = new BABYLON.Color3(0.5,  0.8, 0.5);
 
+		// track code
+
+
+
+		// end of track code
+
+		var xFn = function(t) { return 650 * _xFn(t); }
+		var zFn = function(t) { return 650 * _yFn(t); }
+
 		var playerSphere = BABYLON.MeshBuilder.CreateSphere("playerSphere", {
 			segements: 12,
 			diameter: 4
