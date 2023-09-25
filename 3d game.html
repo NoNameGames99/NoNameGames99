@@ -122,7 +122,7 @@
 			var minDist = Infinity;
 			for (var t = 0; t <= 1; t += (1 / res)) {
 				var dist = Math.pow(x - xFn(t), 2) + Math.pow(z - zFn(t), 2);
-				if (dist < midDist) {
+				if (dist < minDist) {
 					minDist = dist;
 					minT = t;
 				}
