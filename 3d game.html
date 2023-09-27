@@ -155,7 +155,7 @@
 			ramp.position = new BABYLON.Vector3(xFn(t), 3.2, zFn(t ));
 
 			ramp.rotation.z = angle;
-			ramp.rotation.y = -deriveAngle(t, xFn, zFn);
+			ramp.rotation.y = -derivAngle(t, xFn, zFn);
 		}
 		engine.runRenderLoop(scene.render.bind(scene));
 		window.addEventListener('resize', engine.resize.bind(engine));
