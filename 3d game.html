@@ -148,7 +148,7 @@
 			}, scene);
 			ramp.material = new BABYLON.StandardMaterial("rampMaterial", scene);
 			ramp.material.diffuseColor = new BABYLON.Color3(1, 1, 0);
-			ramp.physicsImpostor = new BABYLON.physicsImpostor(ramp, BABYLON.physicsImpostor.BoxImpostor, {
+			ramp.physicsImpostor = new BABYLON.PhysicsImpostor(ramp, BABYLON.PhysicsImpostor.BoxImpostor, {
 				mass:  0,
 				restitution: 0.9
 			}, scene);
