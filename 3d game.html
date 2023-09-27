@@ -113,7 +113,7 @@
 
 		function drawParametric(xFn, zFn, start, end, res, scene) {
 			for (var t = start; t <= end; t += ((end - start) / res)) {
-				drawPoint(xFn(t), zFn(t), , scene);
+				drawPoint(xFn(t), zFn(t), 0, scene);
 			}
 		}
 		
