@@ -161,6 +161,24 @@
 		window.addEventListener('resize', engine.resize.bind(engine));
 	}
 
+	Function wallAt(xFn, zFn, t, offset, scene) {
+		var wall = BABYLON.MeshBuilder.CreateBox('wall', {
+			height: 8,
+			width: .25,
+			Depth: 12
+		}, scene);
+		angle = -derivAngle(t, xFn, zFn);
+		wall.material = new BABYLON.StandardMaterial("wallMaterial", scene);
+		wall.material.deffuseColor = new BABYLON.Color3(1, 1, 0);
+		wall.physicsImpostor = new BABYLON.PhysicsImpostor(wall, BABYLON.PhysicsImpostor.BoxImpostor, {
+			mass: 0,
+			restitution: 0.9
+		}, scene);
+		wall.position = new BABYLON.Vector3(xFn(t) + (offset * Math.sin(angle)), 4, zFn(t) + (offset * Math.cos(angle)));
+		wall.rotation.y = angle + (Math.PI / 2);
+		return wall;
+	}
+
 	function win(){
 		window.location.reload();
 		alert("You Win!");
