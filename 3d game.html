@@ -163,7 +163,7 @@
 		window.addEventListener('resize', engine.resize.bind(engine));
 	}
 
-	Function wallAt(xFn, zFn, t, offset, scene) {
+	function wallAt(xFn, zFn, t, offset, scene) {
 		var wall = BABYLON.MeshBuilder.CreateBox('wall', {
 			height: 8,
 			width: .25,
