@@ -57,6 +57,8 @@
 		var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), scene);
 
 		rampAt(xFn, zFn, 0.07, -Math.PI / 4, scene);
+
+		wallAt(xFn, zFn, 0.01, -6.1, scene);
 		
 		scene.registerAfterRender(function() {
 			var vel = playerSphere.physicsImpostor.getLinearVelocity();
