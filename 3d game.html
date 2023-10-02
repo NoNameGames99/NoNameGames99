@@ -169,7 +169,7 @@
 			width: .25,
 			Depth: 12
 		}, scene);
-		
+		angle = -derivAngle(t, xFn, zFn);
 		wall.material = new BABYLON.StandardMaterial("wallMaterial", scene);
 		wall.material.deffuseColor = new BABYLON.Color3(1, 1, 0);
 		wall.physicsImpostor = new BABYLON.PhysicsImpostor(wall, BABYLON.PhysicsImpostor.BoxImpostor, {
