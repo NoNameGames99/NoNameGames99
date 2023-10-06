@@ -59,7 +59,7 @@
 		rampAt(xFn, zFn, 0.07, -Math.PI / 4, scene);
 
 		wallAt(xFn, zFn, 0.01, -6.1, scene);
-		
+				
 		scene.registerAfterRender(function() {
 			var vel = playerSphere.physicsImpostor.getLinearVelocity();
 			playerSphere.physicsImpostor.setLinearVelocity(vel.scale(.98));
