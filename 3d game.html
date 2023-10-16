@@ -159,9 +159,6 @@
 			ramp.rotation.z = angle;
 			ramp.rotation.y = -derivAngle(t, xFn, zFn);
 		}
-		engine.runRenderLoop(scene.render.bind(scene));
-		window.addEventListener('resize', engine.resize.bind(engine));
-	
 
 		function wallAt(xFn, zFn, t, offset, scene) {
 			var wall = BABYLON.MeshBuilder.CreateBox('wall', {
@@ -181,6 +178,12 @@
 			wall.rotation.y = angle + (Math.PI / 2);
 			return wall;
 		}
+
+		engine.runRenderLoop(scene.render.bind(scene));
+		window.addEventListener('resize', engine.resize.bind(engine));
+	}
+
+		
 		
 	function win(){
 		window.location.reload();
