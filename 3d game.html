@@ -59,7 +59,7 @@
 			boostMesh.setEnabled(false);
 			function boostAt(xFn, zFn, t) {
 			var newBoost = boostMesh.clone('boost');
-			newBoost.position = new BABYLON.Vector3(xFn(t), 10, zFn(t));
+			newBoost.position = new BABYLON.Vector3(xFn(t), 3.2, zFn(t));
 			newBoost.rotation.y = -derivAngle(t, xFn, zFn);
 			newBoost.setEnabled(true);
 			boosts.push(newBoost);
@@ -85,9 +85,12 @@
 
 		var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0, 1, 0), scene);
 
+
+		//At functions
 		rampAt(xFn, zFn, 0.07, -Math.PI / 4, scene);
 
-		wallAt(xFn, zFn, 0.01, -6.1, scene);
+		wallAt(xFn, zFn, 2, -6.1, scene);
+		//End At functons
 
 		scene.registerAfterRender(function() {
 			var vel = playerSphere.physicsImpostor.getLinearVelocity();
