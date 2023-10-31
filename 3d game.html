@@ -37,7 +37,7 @@
 		// end of track code
 
 		var xFn = function(t) { return 650 * _xFn(t); }
-		var zFn = function(t) { return 650 * _yFn(t); }
+		var zFn = function(t) { return 600 * _yFn(t); }
 
 		var playerSphere = BABYLON.MeshBuilder.CreateSphere("playerSphere", {
 			segements: 12,
@@ -89,7 +89,7 @@
 		//At functions
 		rampAt(xFn, zFn, 0.07, -Math.PI / 4, scene);
 
-		wallAt(xFn, zFn, 0.08, -6.1, scene);
+		wallAt(xFn, zFn, 0.01, -6.1, scene);
 		//End At functons
 
 		scene.registerAfterRender(function() {
