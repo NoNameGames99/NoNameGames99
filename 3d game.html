@@ -96,9 +96,14 @@
 		wallAt3(xFn, zFn, 0.01, 5, scene);
 		//End At functons
 
+		var startTime;
+		var timer = document.querySelector('#timer');
+
 		scene.registerAfterRender(function() {
 			var vel = playerSphere.physicsImpostor.getLinearVelocity();
 			playerSphere.physicsImpostor.setLinearVelocity(vel.scale(.98));
+
+			//start of movement code
 
 			var forward = camera.getFrontPosition(1).subtract(camera.position);
 			forward.y = 0;
@@ -111,6 +116,7 @@
 			var right = BABYLON.Vector3.TransformCoordinates(forward, BABYLON.Matrix.RotationY(Math.PI / 2));
 
 			if (keys.w) {
+				if(!startTime){ startTime = Date.now(); }
 				playerSphere.applyImpulse(forward, playerSphere.getAbsolutePosition());
 			}
 			if (keys.s) {
@@ -122,6 +128,7 @@
 			if (keys.d) {
 				playerSphere.applyImpulse(right, playerSphere.getAbsolutePosition());
 			}
+			//end of movement code
 
 			var currentT = tLookup(xFn, zFn, 500, playerSphere.position.x, playerSphere.position.z);
 
@@ -134,6 +141,10 @@
 
 			if (playerSphere.position.y < -10) {
 				lost();
+			}
+
+			if(startTime) {
+				timer.innerHTML = ((Date.now() - startTime) / 1000).toFixed(2).replace('.',':');
 			}
 		});
 		function drawPoint(x, z, zrot, scene) {
@@ -181,6 +192,8 @@
 			return Math.atan2(derive(zFn, t), derive(xFn, t));
 		}
 
+		//start of ramp code
+
 		function rampAt(xFn, zFn, t, angle, scene) {
 			var ramp = BABYLON.MeshBuilder.CreateBox('ramp', {
 				height: 8,
@@ -198,7 +211,9 @@
 			ramp.rotation.z = angle;
 			ramp.rotation.y = -derivAngle(t, xFn, zFn);
 		}
+		//end of ramp code
 
+		//start of wall code
 		function wallAt(xFn, zFn, t, offset, scene) {
 			var wall = BABYLON.MeshBuilder.CreateBox('wall', {
 				height: 8,
@@ -261,7 +276,8 @@
 
 		engine.runRenderLoop(scene.render.bind(scene));
 		window.addEventListener('resize', engine.resize.bind(engine));
-	}
+		//end of wall code
+	}// end of start function
 
 	
 	
@@ -292,9 +308,20 @@
 			height: 100%;
 			touch-action: none;
 		}
+
+		#timer {
+			position: absolute;
+			left:10px;
+			bottom:10px;
+			color:#ccc;
+			font: 52px sans-serif;
+		}
 	</style>
 </head>
 <body onload="start()">
 	<canvas id="renderCanvas"></canvas>
+
+	<div id="timer">00:00</div>
+
 </body>
 </html>
