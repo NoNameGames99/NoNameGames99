@@ -89,7 +89,11 @@
 		//At functions
 		rampAt(xFn, zFn, 0.07, -Math.PI / 4, scene);
 
-		wallAt(xFn, zFn, 0.01, 6.1, scene);
+		wallAt(xFn, zFn, 0.01, -9.7, scene);
+
+		wallAt2(xFn, zFn, 0.02, 9.6, scene);
+
+		wallAt3(xFn, zFn, 0.01, 5, scene);
 		//End At functons
 
 		scene.registerAfterRender(function() {
@@ -199,7 +203,48 @@
 			var wall = BABYLON.MeshBuilder.CreateBox('wall', {
 				height: 8,
 				width: .25,
-				depth: 12
+				depth: 55
+			}, scene);
+			
+			angle = derivAngle(t, xFn, zFn);
+			wall.material = new BABYLON.StandardMaterial("wallMaterial", scene);
+			wall.material.diffuseColor = new BABYLON.Color3(1, 1, 0);
+			wall.physicsImpostor = new BABYLON.PhysicsImpostor(wall, BABYLON.PhysicsImpostor.BoxImpostor, {
+				mass: 0,
+				restitution: 0.9
+			}, scene);
+			wall.position = new BABYLON.Vector3(xFn(t) + (offset * Math.sin(angle)), 4, zFn(t) + (offset * Math.cos(angle)));
+			wall.rotation.y = angle + (Math.PI / 5);
+			return wall;
+		}
+
+		function wallAt2(xFn, zFn, t, offset, scene) {
+			var wall = BABYLON.MeshBuilder.CreateBox('wall', {
+				height: 8,
+				width: .25,
+				depth: 50
+			}, scene);
+			
+			angle = derivAngle(t, xFn, zFn);
+			wall.material = new BABYLON.StandardMaterial("wallMaterial", scene);
+			wall.material.diffuseColor = new BABYLON.Color3(1, 1, 0);
+			wall.physicsImpostor = new BABYLON.PhysicsImpostor(wall, BABYLON.PhysicsImpostor.BoxImpostor, {
+				mass: 0,
+				restitution: 0.9
+			}, scene);
+			wall.position = new BABYLON.Vector3(xFn(t) + (offset * Math.sin(angle)), 4, zFn(t) + (offset * Math.cos(angle)));
+			wall.rotation.y = angle + (Math.PI / 5.3);
+			return wall;
+		}
+
+		engine.runRenderLoop(scene.render.bind(scene));
+		window.addEventListener('resize', engine.resize.bind(engine));
+
+		function wallAt3(xFn, zFn, t, offset, scene) {
+			var wall = BABYLON.MeshBuilder.CreateBox('wall', {
+				height: 8,
+				width: .25,
+				depth: 15
 			}, scene);
 			
 			angle = derivAngle(t, xFn, zFn);
@@ -217,6 +262,11 @@
 		engine.runRenderLoop(scene.render.bind(scene));
 		window.addEventListener('resize', engine.resize.bind(engine));
 	}
+
+	
+	
+
+
 
 		
 		
